@@ -1,35 +1,31 @@
-
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<string>
+#include<ctype.h>
 using namespace std;
 
+int main() {
+    string str;
+    bool first_char = true;
+    while( getline(cin, str) ) {
+        for(int i = 0, j = -1 ; i < str.size() ; i++) {
+            if( !isalpha(str[i]) ) {
+                first_char = true;
+                continue;
+            }
+            if( first_char ) {
+                cout << (char)toupper(str[i]);
+                first_char = false;
+            }
+            else {
+                if( isupper(str[i]) )
+                    cout << (char)tolower(str[i]);
+                else
+                    cout << str[i];
+            }
+        }
+        cout << endl;
+        first_char = true;
+    }
+    return 0;
+}
 
-void removes(char* str)
-{
-  int count = 0;
-  for (int i =0; str[i]; i++)
-  {
-    if(str[i] != ' ')
-    {
-      str[count++]= str[i];
-    }
-  }
-  str[count] = '\0';
-}
-int main()
-{
-  int size =80;
-  char str[size];
-  cin.getline(str,size);
-  str[0]= toupper(str[0]);
-  for(int i = 1; i < size; i++)
-  {
-    if(str[i-1] == ' ')
-    {
-      str[i] = toupper(str[i]);
-    }
-  }
-  removes(str);
-  cout<<str<<endl;
-  return 0;
-}
